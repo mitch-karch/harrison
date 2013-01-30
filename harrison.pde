@@ -1,13 +1,15 @@
 void setup(){
-  
+  noLoop();
 }
 
 void draw(){
   
+
 }
 
 void makeMaths(int level){
   //TODO:Generate problem
+  textSize(32);
   String[] ops = {"+","-","*","/"};
   int difficulty     = Math.Floor(level/3 + level%3);
   int firstOpperand  = Math.Floor(difficulty*5/2+(Math.Random())*difficulty*10);
@@ -65,6 +67,7 @@ void makeMaths(int level){
     answerChoiceB = answer - Math.Floor(difficulty*5/2+(Math.Random())*difficulty*5);
     answerChoiceC = answer + 10;
     answerChoiceD = 42;
+    break;
    case 1:
     answerChoiceA = answer + Math.Floor(difficulty*5/2+(Math.Random())*difficulty*5);
     answerChoiceB = answer;
@@ -73,11 +76,13 @@ void makeMaths(int level){
     {
       answerChoiceD = answer + Math.Floor(difficulty*5/2+(Math.Random())*difficulty*5);
     }
+    break;
    case 2:
     answerChoiceA = answer + 10;
     answerChoiceB = answer - 10;
     answerChoiceC = answer;
     answerChoiceD = answer + Math.Floor(difficulty*5/2+(Math.Random())*difficulty*5);
+    break;
    case 3:
     answerChoiceA = answer + Math.Floor(difficulty*5/2+(Math.Random())*difficulty*5);
     do while(answerChoiceB == answerChoiceA)
@@ -86,5 +91,6 @@ void makeMaths(int level){
     }
     answerChoiceC = answer - Math.Floor(difficulty*5/2+(Math.Random())*difficulty*5);
     answerChoiceD = answer;
+    break;
   }
 }
