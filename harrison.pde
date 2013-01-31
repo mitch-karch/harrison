@@ -19,7 +19,7 @@ void mousePressed(){
   makeMaths(i);
   i++;
   if(i%6==0){
-    text("GAME SHOULD RESET NOW", width/2, height/2);
+    //text("GAME SHOULD RESET NOW", width/2, height/2);
   }
 }
 
@@ -30,7 +30,7 @@ void makeMaths(int level){
   textSize(32);
   textAlign(CENTER,CENTER);
   String[] ops        = {"+","-","*","/"};
-  int difficulty      = (int) Math.floor((level/3.0 + level%3));
+  int difficulty      = (int) Math.floor(((10-level)/3.0)+4*((level-1)%3));
   int firstOpperand   = (int) Math.floor(difficulty*5/2+(Math.random())*difficulty*10);
   int secondOpperand  = (int) Math.floor(difficulty*5/2+(Math.random())*difficulty*10);
   int answer          = 0;
@@ -39,7 +39,7 @@ void makeMaths(int level){
   int answerChoiceC   = 0;
   int answerChoiceD   = 0;
   int opperation      = (int) Math.floor(Math.random()*2);
-  int difficultNumber = (int)Math.floor(difficulty*5/2+(Math.random())*difficulty*10);
+  int difficultNumber = (int) Math.floor(difficulty*5/2+(Math.random())*difficulty*10);
   switch(level){
    case 0:
      firstOpperand  = 2;
@@ -72,7 +72,7 @@ void makeMaths(int level){
        answer = firstOpperand + secondOpperand + difficultNumber;
        text(firstOpperand+ops[0]+secondOpperand+ops[0]+difficultNumber+"=", width/2, height/2);
        break;
-      default:     
+      default:
        answer = firstOpperand - secondOpperand - difficultNumber;
        text(firstOpperand+ops[0]+secondOpperand+ops[1]+difficultNumber+"=", width/2, height/2);
      }
@@ -80,6 +80,18 @@ void makeMaths(int level){
    break;
    
    case 4:
+     answer = firstOpperand * secondOpperand;
+     text(firstOpperand+ops[2]+secondOpperand+"=", width/2, height/2);
+     // <120 + <120 - 3
+   break;
+   
+   case 5:
+     answer = firstOpperand * secondOpperand;
+     text(firstOpperand+ops[2]+secondOpperand+"=", width/2, height/2);
+     // <120 + <120 - 3
+   break;
+   
+   case 6:
      answer = firstOpperand * secondOpperand;
      text(firstOpperand+ops[2]+secondOpperand+"=", width/2, height/2);
      // <120 + <120 - 3
