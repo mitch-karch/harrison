@@ -20,6 +20,7 @@ void mousePressed(){
   i++;
   if(i%6==0){
     text("GAME SHOULD RESET NOW", width/2, height/2);
+    i=0;
   }
 }
 
