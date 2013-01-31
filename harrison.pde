@@ -365,14 +365,15 @@ class GameSpace{
    }
    
    void genAnswers(){
+    fill(bg);
+    rect(width*(player-1),0,width/2,2*height/13);
+    fill(0,0,0);
+    stroke(0,0,0);
+    line(width/2,0,width/2,height);
+    noStroke();
+    text("score: "+i, ((player*7)-1)*width/14, height/13);
     if(i>5){
-      fill(bg);
-      rect(width*(player-1),0,width/2,2*height/13);
-      fill(0,0,0);
-      stroke(0,0,0);
-      line(width/2,0,width/2,height);
-      noStroke();
-      text("Please insert an earbud.",(player*2-1)*width/4 ,height/13);
+      text("Please insert earbud.",(player*3-2)*width/6 ,height/13);
     }
     if(!gameOver){
       fill(bg);
