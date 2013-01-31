@@ -1,44 +1,63 @@
 //Justin Comins && Mitchell Karchemsky
-int i = 0;
-color bg = #B0B0B0;
+import controlP5.*;
+ControlP5 cp5;
 
+int i             = 0;
+color bg          = #B0B0B0;
+
+int answer        = 0;
+int answerChoiceA = 0;
+int answerChoiceB = 0;
+int answerChoiceC = 0;
+int answerChoiceD = 0;
+
+int score         = 0;
 void setup(){
   size(512, 512);
   fill(0, 0, 0);
   background(bg);
+   cp5 = new ControlP5(this);
+  cp5.addButton("GET")
+     .setValue(0)
+     .setPosition(100,height-100)
+     .setSize(80,20)
+     .setId(1);
+  cp5.addButton("READY")
+     .setValue(0)
+     .setPosition(200,height-100)
+     .setSize(80,20)
+     .setId(2);
+  cp5.addButton("TO")
+     .setValue(0)
+     .setPosition(300,height-100)
+     .setSize(80,20)
+     .setId(3);
+  cp5.addButton("PLAY")
+     .setValue(0)
+     .setPosition(400,height-100)
+     .setSize(80,20)
+     .setId(4);
 }
 
 void draw(){
-  
 
 }
 
 void mousePressed(){
-  background(bg);
-  println("i: "+i);
-  makeMaths(i);
-  i++;
-  if(i%6==0){
-    text("GAME SHOULD RESET NOW", width/2, height/2);
-    i=0;
-  }
+  
 }
 
 
 
 void makeMaths(int level){
   //TODO:Generate problem
-  textSize(32);
+  textSize(64);
   textAlign(CENTER,CENTER);
   String[] ops        = {"+","-","*","/"};
   int difficulty      = (int) Math.floor((level/3.0 + level%3));
   int firstOpperand   = (int) Math.floor(difficulty*5/2+(Math.random())*difficulty*10);
   int secondOpperand  = (int) Math.floor(difficulty*5/2+(Math.random())*difficulty*10);
-  int answer          = 0;
-  int answerChoiceA   = 0;
-  int answerChoiceB   = 0;
-  int answerChoiceC   = 0;
-  int answerChoiceD   = 0;
+  
   int opperation      = (int) Math.floor(Math.random()*2);
   int difficultNumber = (int)Math.floor(difficulty*5/2+(Math.random())*difficulty*10);
   switch(level){
@@ -47,11 +66,12 @@ void makeMaths(int level){
      secondOpperand = 2;
      answer = firstOpperand + secondOpperand;
      text(firstOpperand+ops[0]+secondOpperand+"=", width/2, height/2);
+     break;
    case 1:
      answer = firstOpperand + secondOpperand;
      text(firstOpperand+ops[0]+secondOpperand+"=", width/2, height/2);
      // 2 + 2 = ?
-   break;
+    break;
    
    case 2:
      switch(opperation){
@@ -121,5 +141,20 @@ void makeMaths(int level){
         answerChoiceD = answer;
       break;
       }
-  
+
+}
+
+void controlEvent(ControlEvent e){
+  if((int)e.getValue() == answer){
+      score++; 
+  }
+  background(bg);
+  println("i: "+i);
+  makeMaths(i);
+  i++;
+  if(i%6==0){
+    text("GAME SHOULD RESET NOW", width/2, height/2);
+    i=0;
+  }
+  nextValues();
 }
