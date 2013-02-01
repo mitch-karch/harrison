@@ -7,6 +7,7 @@ GameSpace p1;
 GameSpace p2;
 color bg;
 int input;
+int disableTime = 2000;
 boolean noP1 = false;
 boolean noP2 = false;
 boolean gameOver = false;
@@ -51,7 +52,9 @@ void keyPressed(){
     }
     if(p2.checkAnswer(input)){
       p2.nextLevel();
-    }
+    }else if (input>0){
+      p2.missed++;
+    } 
     disableKeyPress(2);
   }
   else if (!noP1){
@@ -67,8 +70,10 @@ void keyPressed(){
     if((int)key == 100){
       input = 4;
     }
-    if (p1.checkAnswer(input)){
+    if(p1.checkAnswer(input)){
       p1.nextLevel();
+    }else if (input>0){
+      p1.missed++;
     }
     disableKeyPress(1);
   }
@@ -113,11 +118,11 @@ void runGame(){
 void disableKeyPress(int p){
   if(p==1){
     noP1 = true;
-    t.schedule(new keyTime1(),1000);
+    t.schedule(new keyTime1(), disableTime);
   }
   else{
     noP2 = true;
-    t.schedule(new keyTime2(),1000);
+    t.schedule(new keyTime2(), disableTime);
   }
 }
 
@@ -136,12 +141,13 @@ class GameSpace{
       cancel();
     }
   }
-
+  
   boolean changeQFill = false;
   boolean changeAFill = false;
   color answerFill    = color(0,0,0);
   color questionFill  = color(0,0,0);
   public int i        = 0;
+  public int missed   = 0;
   public int player;
   int answer          = 0;
   int answerChoiceA   = 0;
@@ -371,7 +377,8 @@ class GameSpace{
     stroke(0,0,0);
     line(width/2,0,width/2,height);
     noStroke();
-    text("score: "+i, ((player*7)-1)*width/14, height/13);
+    text(i-1-missed, ((player*7)-1)*width/14, height/13);
+    //i-1-missed = score
     if(i>5){
       text("Please insert earbud.",(player*3-2)*width/6 ,height/13);
     }
